@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* ---- brand palette ---- */
+  --color-ink: #0c0f14;
+  --color-ink-soft: #131820;
+  --color-panel: #171d27;
+  --color-panel-line: #262e3b;
+  --color-paper: #f7f3ea;
+  --color-paper-dim: #ece5d4;
+  --color-charcoal: #201c16;
+  --color-brass: #c19a49;
+  --color-brass-soft: #e4cd93;
+  --color-emerald: #164438;
+  --color-emerald-soft: #1f5c4c;
+  --color-ash: #8993a4;
+  --color-ash-dark: #57616f;
+
+  /* ---- fonts (self-hosted system stacks — no external font fetch) ---- */
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia,
+    "Times New Roman", serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Fira Code", ui-monospace,
+    Menlo, Consolas, monospace;
+
+  --shadow-card:
+    0 1px 2px 0 rgb(0 0 0 / 0.35), 0 30px 60px -20px rgb(0 0 0 / 0.55);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: #eef1f5;
+  font-family: var(--font-body);
+  font-optical-sizing: auto;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-mono-brand {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: var(--color-brass);
+  color: #201c16;
+}
+
+/* Subtle grain so the dark shell doesn't look flat / default-AI-black */
+.bg-grain {
+  position: relative;
+  isolation: isolate;
+}
+.bg-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgb(193 154 73 / 0.06),
+      transparent 40%
+    ),
+    radial-gradient(circle at 85% 0%, rgb(31 92 76 / 0.14), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgb(193 154 73 / 0.05), transparent 50%);
+}
+
+/* Blueprint grid used as a faint texture inside the property card hero */
+.blueprint-grid {
+  background-image: linear-gradient(
+      rgb(247 243 234 / 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgb(247 243 234 / 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Custom scrollbar for the form column */
+.styled-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.styled-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.styled-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-panel-line);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
